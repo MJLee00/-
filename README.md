@@ -24,8 +24,9 @@
 #服务功能
 |  服务名称  | 端口号 | 功能 |
 |  ----  | ----  |  ----|
-|  pp-oauth-server  | 40400      | 用户登录认证返回cookie和token，第一次获取短令牌和cookie，进行第二次访问redis获取长令牌|
+|  pp-service-oauth | 40400      | 用户登录认证返回cookie和token，第一次获取短令牌和cookie，进行第二次访问redis获取长令牌|
 |  pp-govern-gateway  |  60201     | 用户进行后端微服务访问，RPC调用微服务 |
-|  pp-source-server  |  8888/9999     |  资源服务器，可以根据长令牌中的权限进行过滤|
+|  pp-service-source  |  8888/9999     |  资源服务器，可以根据长令牌中的权限进行过滤|
 | pp-govern-center|40401/40402|微服务注册中心，用于监听各个微服务的状态，使得各个服务之间可以进行互相调用|
+| pp-service-ucenter| 40300|用于获取从pp-service-oauth服务中进行的远程调用请求，返回用户信息，给oauth进行验证|
 
