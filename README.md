@@ -18,3 +18,12 @@
 ##认证流程3
 <img src="https://github.com/MJLee00/ArtistPlatformBackend/documents/认证流程3.jpg" width="50%">
 
+
+#服务功能
+|  服务名称  | 端口号 | 功能 |
+|  ----  | ----  |  ----|
+|  pp-oauth-server  | 40400      | 用户登录认证返回cookie和token，第一次获取短令牌和cookie，进行第二次访问redis获取长令牌|
+|  pp-govern-gateway  |  60201     | 用户进行后端微服务访问，RPC调用微服务 |
+|  pp-source-server  |  8888/9999     |  资源服务器，可以根据长令牌中的权限进行过滤|
+| pp-govern-center|40401/40402|微服务注册中心，用于监听各个微服务的状态，使得各个服务之间可以进行互相调用|
+
