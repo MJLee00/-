@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.passing.platform.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="com.passing.platform.domain.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="account" jdbcType="VARCHAR" property="account" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+    <result column="profileImage" jdbcType="VARCHAR" property="profileimage" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="intro" jdbcType="VARCHAR" property="intro" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <association property="teacher" javaType="com.passing.platform.domain.Teacher" >
+        <id column="id" javaType="INTEGER" property="uid"/>
+        <result column="businessname" jdbcType="VARCHAR" property="businessname" />
+        <result column="businesslogo" jdbcType="VARCHAR" property="businesslogo" />
+        <result column="mainitem" jdbcType="INTEGER" property="mainitem" />
+        <result column="commitment" jdbcType="VARCHAR" property="commitment" />
+        <result column="imageone" jdbcType="VARCHAR" property="imageone" />
+        <result column="imagetwo" jdbcType="VARCHAR" property="imagetwo" />
+        <result column="businessplan" jdbcType="VARCHAR" property="businessplan" />
+        <result column="sequence" jdbcType="INTEGER" property="sequence" />
+        <result column="courseid" jdbcType="INTEGER" property="courseid" />
+    </association>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, account, password, type, nickname, profileImage, sex, intro, name, phone, email
+  </sql>
+
+  <!--自定义-->
+  <select id="getAllUserTeacher" resultMap="BaseResultMap">
+    select * from user u ,teacher t  where u.id=t.uid limit #{0},#{1}
+  </select>
+  <select id="getUserTeacherById" resultMap="BaseResultMap">
+      select * from user u ,teacher t where u.id=t.uid and u.id=#{id};
+  </select>
+  <select id="getIdByAccountAndPwd" resultType="java.lang.Integer" >
+    select id from user where account=#{0} and password=#{1}
+  </select>
+  <select id="verifyPassword" resultType="java.lang.Integer">
+    SELECT count(*) FROM user where account= #{0} and password= #{1};
+  </select>
+
+  <select id="getType" resultType="java.lang.Integer">
+    SELECT type FROM user where account = #{0} and password = #{1};
+  </select>
+
+  <select id="selectUserByAccount" resultType="java.lang.Integer">
+
+    select count(*) from user where account = #{0};
+  </select>
+
+
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyProperty="id" parameterType="com.passing.platform.domain.User" useGeneratedKeys="true">
+    insert into user (id, account, password, 
+      type, nickname, profileImage, 
+      sex, intro, name, phone, 
+      email)
+    values (#{id,jdbcType=INTEGER}, #{account,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{type,jdbcType=INTEGER}, #{nickname,jdbcType=VARCHAR}, #{profileimage,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=INTEGER}, #{intro,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR})
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.passing.platform.domain.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="account != null">
+        account,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="nickname != null">
+        nickname,
+      </if>
+      <if test="profileimage != null">
+        profileImage,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="intro != null">
+        intro,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="account != null">
+        #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="nickname != null">
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="profileimage != null">
+        #{profileimage,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="intro != null">
+        #{intro,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.passing.platform.domain.User">
+    update user
+    <set>
+      <if test="account != null">
+        account = #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="nickname != null">
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="profileimage != null">
+        profileImage = #{profileimage,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="intro != null">
+        intro = #{intro,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.passing.platform.domain.User">
+    update user
+    set account = #{account,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      profileImage = #{profileimage,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      intro = #{intro,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

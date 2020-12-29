@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.passing.platform.dao.WorksMapper" >
+  <resultMap id="BaseResultMap" type="com.passing.platform.domain.Works" >
+    <id column="worksid" property="worksid" jdbcType="INTEGER" />
+    <result column="userid" property="userid" jdbcType="INTEGER" />
+    <result column="worksname" property="worksname" jdbcType="VARCHAR" />
+    <result column="vedio" property="vedio" jdbcType="VARCHAR" />
+    <result column="img" property="img" jdbcType="VARCHAR" />
+    <result column="publishtime" property="publishtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.passing.platform.domain.Works" extends="BaseResultMap" >
+    <result column="workscontent" property="workscontent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    worksid, userid, worksname, vedio, img, publishtime
+  </sql>
+  <sql id="Blob_Column_List" >
+    workscontent
+  </sql>
+  <select id="selectWorkByTeacherid" resultType="com.passing.platform.domain.Works" parameterType="java.lang.Integer">
+    select * from works where userid=#{0} limit #{1},#{2}
+  </select>
+
+  <select id="selectCountByTeacherid" resultType="java.lang.Integer" >
+    select count(*) from works where userid=#{0};
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from works
+    where worksid = #{worksid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from works
+    where worksid = #{worksid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.passing.platform.domain.Works" >
+    insert into works (worksid, userid, worksname, 
+      vedio, img, publishtime, 
+      workscontent)
+    values (#{worksid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{worksname,jdbcType=VARCHAR}, 
+      #{vedio,jdbcType=VARCHAR}, #{img,jdbcType=VARCHAR}, #{publishtime,jdbcType=TIMESTAMP}, 
+      #{workscontent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.passing.platform.domain.Works" >
+    insert into works
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="worksid != null" >
+        worksid,
+      </if>
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="worksname != null" >
+        worksname,
+      </if>
+      <if test="vedio != null" >
+        vedio,
+      </if>
+      <if test="img != null" >
+        img,
+      </if>
+      <if test="publishtime != null" >
+        publishtime,
+      </if>
+      <if test="workscontent != null" >
+        workscontent,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="worksid != null" >
+        #{worksid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="worksname != null" >
+        #{worksname,jdbcType=VARCHAR},
+      </if>
+      <if test="vedio != null" >
+        #{vedio,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null" >
+        #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="publishtime != null" >
+        #{publishtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="workscontent != null" >
+        #{workscontent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.passing.platform.domain.Works" >
+    update works
+    <set >
+      <if test="userid != null" >
+        userid = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="worksname != null" >
+        worksname = #{worksname,jdbcType=VARCHAR},
+      </if>
+      <if test="vedio != null" >
+        vedio = #{vedio,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null" >
+        img = #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="publishtime != null" >
+        publishtime = #{publishtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="workscontent != null" >
+        workscontent = #{workscontent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where worksid = #{worksid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.passing.platform.domain.Works" >
+    update works
+    set userid = #{userid,jdbcType=INTEGER},
+      worksname = #{worksname,jdbcType=VARCHAR},
+      vedio = #{vedio,jdbcType=VARCHAR},
+      img = #{img,jdbcType=VARCHAR},
+      publishtime = #{publishtime,jdbcType=TIMESTAMP},
+      workscontent = #{workscontent,jdbcType=LONGVARCHAR}
+    where worksid = #{worksid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.passing.platform.domain.Works" >
+    update works
+    set userid = #{userid,jdbcType=INTEGER},
+      worksname = #{worksname,jdbcType=VARCHAR},
+      vedio = #{vedio,jdbcType=VARCHAR},
+      img = #{img,jdbcType=VARCHAR},
+      publishtime = #{publishtime,jdbcType=TIMESTAMP}
+    where worksid = #{worksid,jdbcType=INTEGER}
+  </update>
+</mapper>

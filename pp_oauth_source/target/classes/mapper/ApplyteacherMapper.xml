@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.passing.platform.dao.ApplyteacherMapper" >
+  <resultMap id="BaseResultMap" type="com.passing.platform.domain.Applyteacher" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="applyid" property="applyid" jdbcType="INTEGER" />
+    <result column="selfintro" property="selfintro" jdbcType="VARCHAR" />
+    <result column="reason" property="reason" jdbcType="VARCHAR" />
+    <result column="advangtage" property="advangtage" jdbcType="VARCHAR" />
+    <result column="prize" property="prize" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="isConfirmed" property="isconfirmed" jdbcType="BIT" />
+    <result column="recruitid" property="recruitid" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, applyid, selfintro, reason, advangtage, prize, name, phone, email, isConfirmed, 
+    recruitid
+  </sql>
+  
+
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from applyteacher
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from applyteacher
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.passing.platform.domain.Applyteacher"  useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+
+
+
+
+    insert into applyteacher (id, applyid, selfintro, 
+      reason, advangtage, prize, 
+      name, phone, email, 
+      isConfirmed, recruitid)
+    values (#{id,jdbcType=INTEGER}, #{applyid,jdbcType=INTEGER}, #{selfintro,jdbcType=VARCHAR}, 
+      #{reason,jdbcType=VARCHAR}, #{advangtage,jdbcType=VARCHAR}, #{prize,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{isconfirmed,jdbcType=BIT}, #{recruitid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.passing.platform.domain.Applyteacher" >
+    insert into applyteacher
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="applyid != null" >
+        applyid,
+      </if>
+      <if test="selfintro != null" >
+        selfintro,
+      </if>
+      <if test="reason != null" >
+        reason,
+      </if>
+      <if test="advangtage != null" >
+        advangtage,
+      </if>
+      <if test="prize != null" >
+        prize,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="isconfirmed != null" >
+        isConfirmed,
+      </if>
+      <if test="recruitid != null" >
+        recruitid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="applyid != null" >
+        #{applyid,jdbcType=INTEGER},
+      </if>
+      <if test="selfintro != null" >
+        #{selfintro,jdbcType=VARCHAR},
+      </if>
+      <if test="reason != null" >
+        #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="advangtage != null" >
+        #{advangtage,jdbcType=VARCHAR},
+      </if>
+      <if test="prize != null" >
+        #{prize,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="isconfirmed != null" >
+        #{isconfirmed,jdbcType=BIT},
+      </if>
+      <if test="recruitid != null" >
+        #{recruitid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.passing.platform.domain.Applyteacher" >
+    update applyteacher
+    <set >
+      <if test="applyid != null" >
+        applyid = #{applyid,jdbcType=INTEGER},
+      </if>
+      <if test="selfintro != null" >
+        selfintro = #{selfintro,jdbcType=VARCHAR},
+      </if>
+      <if test="reason != null" >
+        reason = #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="advangtage != null" >
+        advangtage = #{advangtage,jdbcType=VARCHAR},
+      </if>
+      <if test="prize != null" >
+        prize = #{prize,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="isconfirmed != null" >
+        isConfirmed = #{isconfirmed,jdbcType=BIT},
+      </if>
+      <if test="recruitid != null" >
+        recruitid = #{recruitid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.passing.platform.domain.Applyteacher" >
+    update applyteacher
+    set applyid = #{applyid,jdbcType=INTEGER},
+      selfintro = #{selfintro,jdbcType=VARCHAR},
+      reason = #{reason,jdbcType=VARCHAR},
+      advangtage = #{advangtage,jdbcType=VARCHAR},
+      prize = #{prize,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      isConfirmed = #{isconfirmed,jdbcType=BIT},
+      recruitid = #{recruitid,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.passing.platform.dao.InherittokenMapper" >
+  <resultMap id="BaseResultMap" type="com.passing.platform.domain.Inherittoken" >
+    <id column="inheritTokenid" property="inherittokenid" jdbcType="INTEGER" />
+    <result column="userid" property="userid" jdbcType="INTEGER" />
+    <result column="inheritTokenname" property="inherittokenname" jdbcType="VARCHAR" />
+    <result column="inheritTokenimg" property="inherittokenimg" jdbcType="VARCHAR" />
+    <result column="creattime" property="creattime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.passing.platform.domain.Inherittoken" extends="BaseResultMap" >
+    <result column="inheritTokencontent" property="inherittokencontent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    inheritTokenid, userid, inheritTokenname, inheritTokenimg, creattime
+  </sql>
+  <sql id="Blob_Column_List" >
+    inheritTokencontent
+  </sql>
+
+
+  <select id="selectAllInherittoken" resultType="com.passing.platform.domain.Inherittoken" parameterType="java.lang.Integer">
+    select * from inherittoken where userid=#{0} limit #{1},#{2};
+  </select>
+
+  <select id="selectAllCountByUser" resultType="java.lang.Integer">
+    select count(*) from inherittoken where userid=#{0};
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from inherittoken
+    where inheritTokenid = #{inherittokenid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from inherittoken
+    where inheritTokenid = #{inherittokenid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.passing.platform.domain.Inherittoken" useGeneratedKeys="true" keyProperty="inherittokenid" keyColumn="inheritTokenid">
+    insert into inherittoken (inheritTokenid, userid, inheritTokenname, 
+      inheritTokenimg, creattime, inheritTokencontent
+      )
+    values (#{inherittokenid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{inherittokenname,jdbcType=VARCHAR}, 
+      #{inherittokenimg,jdbcType=VARCHAR}, #{creattime,jdbcType=TIMESTAMP}, #{inherittokencontent,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.passing.platform.domain.Inherittoken" >
+    insert into inherittoken
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="inherittokenid != null" >
+        inheritTokenid,
+      </if>
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="inherittokenname != null" >
+        inheritTokenname,
+      </if>
+      <if test="inherittokenimg != null" >
+        inheritTokenimg,
+      </if>
+      <if test="creattime != null" >
+        creattime,
+      </if>
+      <if test="inherittokencontent != null" >
+        inheritTokencontent,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="inherittokenid != null" >
+        #{inherittokenid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="inherittokenname != null" >
+        #{inherittokenname,jdbcType=VARCHAR},
+      </if>
+      <if test="inherittokenimg != null" >
+        #{inherittokenimg,jdbcType=VARCHAR},
+      </if>
+      <if test="creattime != null" >
+        #{creattime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="inherittokencontent != null" >
+        #{inherittokencontent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.passing.platform.domain.Inherittoken" >
+    update inherittoken
+    <set >
+      <if test="userid != null" >
+        userid = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="inherittokenname != null" >
+        inheritTokenname = #{inherittokenname,jdbcType=VARCHAR},
+      </if>
+      <if test="inherittokenimg != null" >
+        inheritTokenimg = #{inherittokenimg,jdbcType=VARCHAR},
+      </if>
+      <if test="creattime != null" >
+        creattime = #{creattime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="inherittokencontent != null" >
+        inheritTokencontent = #{inherittokencontent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where inheritTokenid = #{inherittokenid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.passing.platform.domain.Inherittoken" >
+    update inherittoken
+    set userid = #{userid,jdbcType=INTEGER},
+      inheritTokenname = #{inherittokenname,jdbcType=VARCHAR},
+      inheritTokenimg = #{inherittokenimg,jdbcType=VARCHAR},
+      creattime = #{creattime,jdbcType=TIMESTAMP},
+      inheritTokencontent = #{inherittokencontent,jdbcType=LONGVARCHAR}
+    where inheritTokenid = #{inherittokenid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.passing.platform.domain.Inherittoken" >
+    update inherittoken
+    set userid = #{userid,jdbcType=INTEGER},
+      inheritTokenname = #{inherittokenname,jdbcType=VARCHAR},
+      inheritTokenimg = #{inherittokenimg,jdbcType=VARCHAR},
+      creattime = #{creattime,jdbcType=TIMESTAMP}
+    where inheritTokenid = #{inherittokenid,jdbcType=INTEGER}
+  </update>
+</mapper>

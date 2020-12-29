@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.passing.platform.dao.TeachertouserMapper" >
+  <resultMap id="BaseResultMap" type="com.passing.platform.domain.Teachertouser" >
+    <id column="idTeacherToUser" property="idteachertouser" jdbcType="INTEGER" />
+    <result column="teacherid" property="teacherid" jdbcType="INTEGER" />
+    <result column="studentid" property="studentid" jdbcType="INTEGER" />
+    <result column="starttime" property="starttime" jdbcType="TIMESTAMP" />
+
+
+  </resultMap>
+
+  <resultMap id="StudentsMap" type="com.passing.platform.domain.Teachertouser" >
+    <id column="teacherid" property="teacherid" jdbcType="INTEGER" />
+
+    <collection property="studentsList" javaType="list" ofType="com.passing.platform.domain.User" >
+      <result column="s_id" jdbcType="INTEGER" property="id" />
+      <result column="account" jdbcType="VARCHAR" property="account" />
+      <result column="password" jdbcType="VARCHAR" property="password" />
+      <result column="type" jdbcType="INTEGER" property="type" />
+      <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+      <result column="profileImage" jdbcType="VARCHAR" property="profileimage" />
+      <result column="sex" jdbcType="INTEGER" property="sex" />
+      <result column="intro" jdbcType="VARCHAR" property="intro" />
+      <result column="name" jdbcType="VARCHAR" property="name" />
+      <result column="phone" jdbcType="VARCHAR" property="phone" />
+      <result column="email" jdbcType="VARCHAR" property="email" />
+
+    </collection>
+
+  </resultMap>
+
+  <resultMap id="TeachersMap" type="com.passing.platform.domain.Teachertouser">
+    <id column="studentid" property="studentid" jdbcType="INTEGER" />
+
+    <collection property="teacherList" javaType="list" ofType="com.passing.platform.domain.User" >
+      <id column="s_id" jdbcType="INTEGER" property="id" />
+      <result column="account" jdbcType="VARCHAR" property="account" />
+      <result column="password" jdbcType="VARCHAR" property="password" />
+      <result column="type" jdbcType="INTEGER" property="type" />
+      <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+      <result column="profileImage" jdbcType="VARCHAR" property="profileimage" />
+      <result column="sex" jdbcType="INTEGER" property="sex" />
+      <result column="intro" jdbcType="VARCHAR" property="intro" />
+      <result column="name" jdbcType="VARCHAR" property="name" />
+      <result column="phone" jdbcType="VARCHAR" property="phone" />
+      <result column="email" jdbcType="VARCHAR" property="email" />
+      <association property="teacher" javaType="com.passing.platform.domain.Teacher">
+        <id column="uid" javaType="INTEGER" property="uid"/>
+        <result column="businessname" jdbcType="VARCHAR" property="businessname" />
+        <result column="businesslogo" jdbcType="VARCHAR" property="businesslogo" />
+        <result column="mainitem" jdbcType="INTEGER" property="mainitem" />
+        <result column="commitment" jdbcType="VARCHAR" property="commitment" />
+        <result column="imageone" jdbcType="VARCHAR" property="imageone" />
+        <result column="imagetwo" jdbcType="VARCHAR" property="imagetwo" />
+        <result column="businessplan" jdbcType="VARCHAR" property="businessplan" />
+        <result column="sequence" jdbcType="INTEGER" property="sequence" />
+        <result column="courseid" jdbcType="INTEGER" property="courseid" />
+      </association>
+    </collection>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    idTeacherToUser, teacherid, studentid, starttime
+  </sql>
+
+  <select id="getTeacherByStudentId" resultMap="TeachersMap">
+    select u.id as s_id,tu.studentid,u.account,u.password,
+    u.type,u.nickname,u.profileImage,u.sex,u.intro,u.name,u.phone,u.email,t.*
+    from user u  join teachertouser  tu
+    on u.id=tu.teacherid
+    join teacher t on t.uid=u.id
+    where tu.studentid=#{0} limit #{1},#{2}
+  </select>
+
+  <select id="getTeacherCountByStudentId" resultType="java.lang.Integer" >
+    select count(*) from teachertouser
+    where studentid=#{id}
+  </select>
+
+  <select id="getStudentsByTeacherId" resultMap="StudentsMap" >
+    select u.id s_id,u.account,u.password,
+    u.type,u.nickname,u.profileImage,u.sex,u.intro,u.name,u.phone,u.email,tu.teacherid
+    from user u left join teachertouser  tu
+    on u.id=tu.studentid
+    where tu.teacherid=#{0} limit #{1},#{2}
+  </select>
+
+  <select id="getStudentCountByTeacherId" resultType="java.lang.Integer" >
+    select count(*) from teachertouser
+    where teacherid=#{id}
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from teachertouser
+    where idTeacherToUser = #{idteachertouser,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from teachertouser
+    where idTeacherToUser = #{idteachertouser,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.passing.platform.domain.Teachertouser" >
+    insert into teachertouser (idTeacherToUser, teacherid, studentid, 
+      starttime)
+    values (#{idteachertouser,jdbcType=INTEGER}, #{teacherid,jdbcType=INTEGER}, #{studentid,jdbcType=INTEGER}, 
+      #{starttime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.passing.platform.domain.Teachertouser" >
+    insert into teachertouser
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="idteachertouser != null" >
+        idTeacherToUser,
+      </if>
+      <if test="teacherid != null" >
+        teacherid,
+      </if>
+      <if test="studentid != null" >
+        studentid,
+      </if>
+      <if test="starttime != null" >
+        starttime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="idteachertouser != null" >
+        #{idteachertouser,jdbcType=INTEGER},
+      </if>
+      <if test="teacherid != null" >
+        #{teacherid,jdbcType=INTEGER},
+      </if>
+      <if test="studentid != null" >
+        #{studentid,jdbcType=INTEGER},
+      </if>
+      <if test="starttime != null" >
+        #{starttime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.passing.platform.domain.Teachertouser" >
+    update teachertouser
+    <set >
+      <if test="teacherid != null" >
+        teacherid = #{teacherid,jdbcType=INTEGER},
+      </if>
+      <if test="studentid != null" >
+        studentid = #{studentid,jdbcType=INTEGER},
+      </if>
+      <if test="starttime != null" >
+        starttime = #{starttime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where idTeacherToUser = #{idteachertouser,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.passing.platform.domain.Teachertouser" >
+    update teachertouser
+    set teacherid = #{teacherid,jdbcType=INTEGER},
+      studentid = #{studentid,jdbcType=INTEGER},
+      starttime = #{starttime,jdbcType=TIMESTAMP}
+    where idTeacherToUser = #{idteachertouser,jdbcType=INTEGER}
+  </update>
+</mapper>

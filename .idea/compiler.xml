@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="pp_oauth_source" />
+        <module name="pp_govern_gateway" />
+        <module name="pp-govern-gateway" />
+        <module name="pp_common_model" />
+        <module name="pp_user_center" />
+        <module name="pp_oauth_server" />
+        <module name="pp_govern_center" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="pp_govern_gateway" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="pp-govern-gateway" options="-parameters" />
+      <module name="pp_common_model" options="-parameters" />
+      <module name="pp_govern_center" options="-parameters" />
+      <module name="pp_govern_gateway" options="-parameters" />
+      <module name="pp_oauth_server" options="-parameters" />
+      <module name="pp_oauth_source" options="-parameters" />
+      <module name="pp_user_center" options="-parameters" />
+    </option>
+  </component>
+</project>

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.passing.platform.dao.RecruitMapper">
+  <resultMap id="BaseResultMap" type="com.passing.platform.domain.Recruit">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="teacherid" jdbcType="INTEGER" property="teacherid" />
+    <result column="maxcount" jdbcType="INTEGER" property="maxcount" />
+    <result column="count" jdbcType="INTEGER" property="count" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="img" jdbcType="VARCHAR" property="img" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, teacherid, maxcount, count, content, title, img
+  </sql>
+
+  <select id="selectRecruitByTeacherid" parameterType="java.lang.Integer" resultType="com.passing.platform.domain.Recruit">
+    select * from recruit where teacherid=#{0} limit #{1},#{2}
+  </select>
+
+  <select id="selectCountByTeacherid" resultType="java.lang.Integer">
+    select count(*) from recruit where teacherid=#{0};
+  </select>
+
+
+  <select id="selectAllRecruit" resultType="com.passing.platform.domain.Recruit" parameterType="java.lang.Integer">
+    select * from recruit  limit #{0},#{1};
+  </select>
+
+  <select id="selectAllCount" resultType="java.lang.Integer">
+    select count(*) from recruit ;
+  </select>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from recruit
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from recruit
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.passing.platform.domain.Recruit">
+    insert into recruit (id, teacherid, maxcount, 
+      count, content, title, 
+      img)
+    values (#{id,jdbcType=INTEGER}, #{teacherid,jdbcType=INTEGER}, #{maxcount,jdbcType=INTEGER}, 
+      #{count,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
+      #{img,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.passing.platform.domain.Recruit">
+    insert into recruit
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="teacherid != null">
+        teacherid,
+      </if>
+      <if test="maxcount != null">
+        maxcount,
+      </if>
+      <if test="count != null">
+        count,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="img != null">
+        img,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="teacherid != null">
+        #{teacherid,jdbcType=INTEGER},
+      </if>
+      <if test="maxcount != null">
+        #{maxcount,jdbcType=INTEGER},
+      </if>
+      <if test="count != null">
+        #{count,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null">
+        #{img,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.passing.platform.domain.Recruit">
+    update recruit
+    <set>
+      <if test="teacherid != null">
+        teacherid = #{teacherid,jdbcType=INTEGER},
+      </if>
+      <if test="maxcount != null">
+        maxcount = #{maxcount,jdbcType=INTEGER},
+      </if>
+      <if test="count != null">
+        count = #{count,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null">
+        img = #{img,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.passing.platform.domain.Recruit">
+    update recruit
+    set teacherid = #{teacherid,jdbcType=INTEGER},
+      maxcount = #{maxcount,jdbcType=INTEGER},
+      count = #{count,jdbcType=INTEGER},
+      content = #{content,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      img = #{img,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

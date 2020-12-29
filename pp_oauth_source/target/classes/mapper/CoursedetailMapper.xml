@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.passing.platform.dao.CoursedetailMapper" >
+  <resultMap id="BaseResultMap" type="com.passing.platform.domain.Coursedetail" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="score" property="score" jdbcType="VARCHAR" />
+    <result column="scoretitle" property="scoretitle" jdbcType="VARCHAR" />
+    <result column="bulletin" property="bulletin" jdbcType="VARCHAR" />
+    <result column="bulletintitle" property="bulletintitle" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="tag" property="tag" jdbcType="VARCHAR" />
+    <result column="author" property="author" jdbcType="VARCHAR" />
+    <result column="src" property="src" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, score, scoretitle, bulletin, bulletintitle, title, tag, author, src
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from coursedetail
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from coursedetail
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.passing.platform.domain.Coursedetail" >
+    insert into coursedetail (id, score, scoretitle, 
+      bulletin, bulletintitle, title, 
+      tag, author, src)
+    values (#{id,jdbcType=INTEGER}, #{score,jdbcType=VARCHAR}, #{scoretitle,jdbcType=VARCHAR}, 
+      #{bulletin,jdbcType=VARCHAR}, #{bulletintitle,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
+      #{tag,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR}, #{src,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.passing.platform.domain.Coursedetail" >
+    insert into coursedetail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="score != null" >
+        score,
+      </if>
+      <if test="scoretitle != null" >
+        scoretitle,
+      </if>
+      <if test="bulletin != null" >
+        bulletin,
+      </if>
+      <if test="bulletintitle != null" >
+        bulletintitle,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="tag != null" >
+        tag,
+      </if>
+      <if test="author != null" >
+        author,
+      </if>
+      <if test="src != null" >
+        src,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="score != null" >
+        #{score,jdbcType=VARCHAR},
+      </if>
+      <if test="scoretitle != null" >
+        #{scoretitle,jdbcType=VARCHAR},
+      </if>
+      <if test="bulletin != null" >
+        #{bulletin,jdbcType=VARCHAR},
+      </if>
+      <if test="bulletintitle != null" >
+        #{bulletintitle,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="tag != null" >
+        #{tag,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null" >
+        #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="src != null" >
+        #{src,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.passing.platform.domain.Coursedetail" >
+    update coursedetail
+    <set >
+      <if test="score != null" >
+        score = #{score,jdbcType=VARCHAR},
+      </if>
+      <if test="scoretitle != null" >
+        scoretitle = #{scoretitle,jdbcType=VARCHAR},
+      </if>
+      <if test="bulletin != null" >
+        bulletin = #{bulletin,jdbcType=VARCHAR},
+      </if>
+      <if test="bulletintitle != null" >
+        bulletintitle = #{bulletintitle,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="tag != null" >
+        tag = #{tag,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null" >
+        author = #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="src != null" >
+        src = #{src,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.passing.platform.domain.Coursedetail" >
+    update coursedetail
+    set score = #{score,jdbcType=VARCHAR},
+      scoretitle = #{scoretitle,jdbcType=VARCHAR},
+      bulletin = #{bulletin,jdbcType=VARCHAR},
+      bulletintitle = #{bulletintitle,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      tag = #{tag,jdbcType=VARCHAR},
+      author = #{author,jdbcType=VARCHAR},
+      src = #{src,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

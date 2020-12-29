@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.passing.platform.dao.CourseintroMapper">
+  <resultMap id="BaseResultMap" type="com.passing.platform.domain.Courseintro">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="teacherid" jdbcType="INTEGER" property="teacherid" />
+    <result column="teachername" jdbcType="VARCHAR" property="teachername" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="intro" jdbcType="VARCHAR" property="intro" />
+    <result column="abstract" jdbcType="VARCHAR" property="abstract" />
+    <result column="summurize" jdbcType="VARCHAR" property="summurize" />
+    <result column="goal" jdbcType="VARCHAR" property="goal" />
+    <result column="outline" jdbcType="VARCHAR" property="outline" />
+    <result column="reference" jdbcType="VARCHAR" property="reference" />
+    <result column="people" jdbcType="INTEGER" property="people" />
+    <result column="sequence" jdbcType="INTEGER" property="sequence" />
+    <result column="src" jdbcType="VARCHAR" property="src" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, teacherid, teachername, title, intro, abstract, summurize, goal, outline, reference, 
+    people, sequence, src
+  </sql>
+  <select id="selectCourseByTeacherid" resultType="com.passing.platform.domain.Courseintro" parameterType="java.lang.Integer">
+    select * from courseintro where teacherid=#{0} order by sequence desc limit #{1},#{2}
+  </select>
+
+  <select id="selectCountByTeacherid" resultType="java.lang.Integer" >
+    select count(*) from courseintro where teacherid=#{0};
+  </select>
+  
+  <select id="selectAllCourse" resultType="com.passing.platform.domain.Courseintro" parameterType="java.lang.Integer">
+    select * from courseintro order by sequence desc limit #{0},#{1};
+  </select>
+
+  <select id="selectAllCount" resultType="java.lang.Integer">
+    select count(*) from courseintro ;
+  </select>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from courseintro
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from courseintro
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.passing.platform.domain.Courseintro">
+    insert into courseintro (id, teacherid, teachername, 
+      title, intro, abstract, 
+      summurize, goal, outline, 
+      reference, people, sequence, 
+      src)
+    values (#{id,jdbcType=INTEGER}, #{teacherid,jdbcType=INTEGER}, #{teachername,jdbcType=VARCHAR}, 
+      #{title,jdbcType=VARCHAR}, #{intro,jdbcType=VARCHAR}, #{abstract,jdbcType=VARCHAR}, 
+      #{summurize,jdbcType=VARCHAR}, #{goal,jdbcType=VARCHAR}, #{outline,jdbcType=VARCHAR}, 
+      #{reference,jdbcType=VARCHAR}, #{people,jdbcType=INTEGER}, #{sequence,jdbcType=INTEGER}, 
+      #{src,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.passing.platform.domain.Courseintro">
+    insert into courseintro
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="teacherid != null">
+        teacherid,
+      </if>
+      <if test="teachername != null">
+        teachername,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="intro != null">
+        intro,
+      </if>
+      <if test="abstract != null">
+        abstract,
+      </if>
+      <if test="summurize != null">
+        summurize,
+      </if>
+      <if test="goal != null">
+        goal,
+      </if>
+      <if test="outline != null">
+        outline,
+      </if>
+      <if test="reference != null">
+        reference,
+      </if>
+      <if test="people != null">
+        people,
+      </if>
+      <if test="sequence != null">
+        sequence,
+      </if>
+      <if test="src != null">
+        src,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="teacherid != null">
+        #{teacherid,jdbcType=INTEGER},
+      </if>
+      <if test="teachername != null">
+        #{teachername,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="intro != null">
+        #{intro,jdbcType=VARCHAR},
+      </if>
+      <if test="abstract != null">
+        #{abstract,jdbcType=VARCHAR},
+      </if>
+      <if test="summurize != null">
+        #{summurize,jdbcType=VARCHAR},
+      </if>
+      <if test="goal != null">
+        #{goal,jdbcType=VARCHAR},
+      </if>
+      <if test="outline != null">
+        #{outline,jdbcType=VARCHAR},
+      </if>
+      <if test="reference != null">
+        #{reference,jdbcType=VARCHAR},
+      </if>
+      <if test="people != null">
+        #{people,jdbcType=INTEGER},
+      </if>
+      <if test="sequence != null">
+        #{sequence,jdbcType=INTEGER},
+      </if>
+      <if test="src != null">
+        #{src,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.passing.platform.domain.Courseintro">
+    update courseintro
+    <set>
+      <if test="teacherid != null">
+        teacherid = #{teacherid,jdbcType=INTEGER},
+      </if>
+      <if test="teachername != null">
+        teachername = #{teachername,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="intro != null">
+        intro = #{intro,jdbcType=VARCHAR},
+      </if>
+      <if test="abstract != null">
+        abstract = #{abstract,jdbcType=VARCHAR},
+      </if>
+      <if test="summurize != null">
+        summurize = #{summurize,jdbcType=VARCHAR},
+      </if>
+      <if test="goal != null">
+        goal = #{goal,jdbcType=VARCHAR},
+      </if>
+      <if test="outline != null">
+        outline = #{outline,jdbcType=VARCHAR},
+      </if>
+      <if test="reference != null">
+        reference = #{reference,jdbcType=VARCHAR},
+      </if>
+      <if test="people != null">
+        people = #{people,jdbcType=INTEGER},
+      </if>
+      <if test="sequence != null">
+        sequence = #{sequence,jdbcType=INTEGER},
+      </if>
+      <if test="src != null">
+        src = #{src,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.passing.platform.domain.Courseintro">
+    update courseintro
+    set teacherid = #{teacherid,jdbcType=INTEGER},
+      teachername = #{teachername,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      intro = #{intro,jdbcType=VARCHAR},
+      abstract = #{abstract,jdbcType=VARCHAR},
+      summurize = #{summurize,jdbcType=VARCHAR},
+      goal = #{goal,jdbcType=VARCHAR},
+      outline = #{outline,jdbcType=VARCHAR},
+      reference = #{reference,jdbcType=VARCHAR},
+      people = #{people,jdbcType=INTEGER},
+      sequence = #{sequence,jdbcType=INTEGER},
+      src = #{src,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

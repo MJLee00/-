@@ -1,0 +1,33 @@
+server:
+  port: ${PORT:8888}
+spring:
+  application:
+    name: pp-service-source
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql:///passingplatform?serverTimezone=UTC
+    username: root
+    password: 123123
+  main:
+    allow-bean-definition-overriding: true #允许我们自己覆盖spring放入到IOC容器的对象
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.passing.platform.domain
+  configuration:
+    map-underscore-to-camel-case: true
+
+logging:
+  level:
+    com.passing.platform: debug
+
+eureka:
+  client:
+    registerWithEureka: true #服务注册开关
+    fetchRegistry: true #服务发现开关
+    serviceUrl: #Eureka客户端与Eureka服务端进行交互的地址，多个中间用逗号分隔
+      defaultZone: ${EUREKA_SERVER:http://localhost:50101/eureka/,http://localhost:50102/eureka/}
+  instance:
+    prefer-ip-address:  true  #将自己的ip地址注册到Eureka服务中
+    ip-address: ${IP_ADDRESS:127.0.0.1}
+    instance-id: ${spring.application.name}:${server.port} #指定实例id
