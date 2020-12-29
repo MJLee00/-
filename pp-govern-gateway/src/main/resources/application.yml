@@ -1,5 +1,5 @@
 server:
-  port: 50201
+  port: 60201
 spring:
   application:
     name: pp-govern-gateway

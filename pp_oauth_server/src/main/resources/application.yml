@@ -27,7 +27,7 @@ auth:
   clientId: passingplatform  #A客户端登陆的id采用oauth2的password模式
   clientSecret: 123         #A客户端登陆的密码
   cookieDomain: www.atspssing.com  #返回的cookie必须前端页面和后端接口在同一个域名中否则set-cookie存不上
-  cookieMaxAge: 1000  #设置cookie过期时间 100秒
+  cookieMaxAge: 360000  #设置cookie过期时间 100秒
 
 #配置keyproperties的bean对象
 #keytool -genkeypair -alias ppkey -keyalg RSA -keypass 123123 -keystore pp.keystore -storepass 123123
