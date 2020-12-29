@@ -12,7 +12,7 @@
 #后端微服务认证流程
 
 ##认证流程1
-<img src="https://github.com/MJLee00/ArtistPlatformBackend/documents/认证流程1.png" width="50%">
+< img src="http://static.runoob.com/images/runoob-logo.png" width="50%">
 
 ##认证流程2
 <img src="https://github.com/MJLee00/ArtistPlatformBackend/documents/认证流程2.jpg" width="50%">
