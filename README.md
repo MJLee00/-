@@ -10,8 +10,11 @@
 ![alt 技术架构图](https://github.com/MJLee00/ArtistPlatformBackend/documents/技术架构图.png)
 #后端微服务认证流程
 ###认证流程1
-![alt 认证流程1](https://github.com/MJLee00/ArtistPlatformBackend/documents/认证流程1.png)
+<img src="https://github.com/MJLee00/ArtistPlatformBackend/documents/认证流程1.png" width="50%">
+
 ###认证流程2
-![alt 认证流程2](https://github.com/MJLee00/ArtistPlatformBackend/documents/认证流程2.png)
+<img src="https://github.com/MJLee00/ArtistPlatformBackend/documents/认证流程2.png" width="50%">
+
 ###认证流程3
-![alt 认证流程3](https://github.com/MJLee00/ArtistPlatformBackend/documents/认证流程3.png)
+<img src="https://github.com/MJLee00/ArtistPlatformBackend/documents/认证流程3.png" width="50%">
+
