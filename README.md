@@ -7,10 +7,10 @@
 用户也可以通过此艺术平台上传艺术品照片进行人工智能鉴定。
 管理员可以对教师资格审批，用户管理，首页轮播图管理等等。
 
-#技术总体架构图
+# 技术总体架构图
 <img src="https://note.youdao.com/yws/api/personal/file/CE3A7EE3F4704C37A110AE8CB7D7B409?method=download&shareKey=e959a75b05ae6a0e472d915bf8b3b205">
 
-#后端微服务认证流程
+# 后端微服务认证流程
 <img src="https://note.youdao.com/yws/api/personal/file/41D47FBFCFF24E85874D96CF0578364C?method=download&shareKey=32b9ce949f841750f998bdfa10e72fae">
 
 <img src="https://note.youdao.com/yws/api/personal/file/E57E2A7346CF4632AD85C78EDDE85482?method=download&shareKey=a7b280940be5f76e18d05b5ab7bdde32">
@@ -19,7 +19,7 @@
 
 
 
-#服务功能
+# 服务功能
 |  服务名称  | 端口号 | 功能 |
 |  ----  | ----  |  ----|
 |  pp-service-oauth | 40400      | 用户登录认证返回cookie和token，第一次获取短令牌和cookie，进行第二次访问redis获取长令牌|
