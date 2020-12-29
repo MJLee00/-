@@ -8,6 +8,7 @@
 管理员可以对教师资格审批，用户管理，首页轮播图管理等等。
 #技术总体架构图
 ![alt 技术架构图](https://github.com/MJLee00/ArtistPlatformBackend/documents/技术架构图.png)
+
 #后端微服务认证流程
 
 ##认证流程1
