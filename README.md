@@ -7,18 +7,9 @@
 用户也可以通过此艺术平台上传艺术品照片进行人工智能鉴定。
 管理员可以对教师资格审批，用户管理，首页轮播图管理等等。
 #技术总体架构图
-![alt 技术架构图](https://github.com/MJLee00/ArtistPlatformBackend/documents/技术架构图.png)
-
-#后端微服务认证流程
-
-##认证流程1
 ![image](https://note.youdao.com/yws/api/personal/file/41D47FBFCFF24E85874D96CF0578364C?method=download&shareKey=32b9ce949f841750f998bdfa10e72fae)
 
-##认证流程2
-<img src="https://github.com/MJLee00/ArtistPlatformBackend/documents/认证流程2.jpg" width="50%">
 
-##认证流程3
-<img src="https://github.com/MJLee00/ArtistPlatformBackend/documents/认证流程3.jpg" width="50%">
 
 
 #服务功能
