@@ -7,7 +7,8 @@
 用户也可以通过此艺术平台上传艺术品照片进行人工智能鉴定。
 管理员可以对教师资格审批，用户管理，首页轮播图管理等等。
 #技术总体架构图
-![image](https://note.youdao.com/yws/api/personal/file/41D47FBFCFF24E85874D96CF0578364C?method=download&shareKey=32b9ce949f841750f998bdfa10e72fae)
+
+<img src="https://note.youdao.com/yws/api/personal/file/41D47FBFCFF24E85874D96CF0578364C?method=download&shareKey=32b9ce949f841750f998bdfa10e72fae">
 
 
 
